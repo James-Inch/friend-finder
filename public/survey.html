@@ -27,7 +27,7 @@
                 <label for="exampleFormControlInput1">Link to Photo Image (Required)</label>
                 <input type="text" class="form-control" id="userImage">
             </div>
-            <hr>    
+            <hr>
             <h3>
                 <strong>Question 1</strong>
             </h3>
@@ -168,6 +168,31 @@
             <a href="#">GitHub Repo</a>
         </div>
     </div>
+
+    <script>
+        $('#add-btn').on('click', function (event) {
+            event.preventDefault();
+            var newTable = {
+                name: $('#name')
+                    .val()
+                    .trim(),
+                phoneNumber: $('#phoneNumber')
+                    .val()
+                    .trim(),
+                email: $('#email')
+                    .val()
+                    .trim(),
+                uniqueID: $('#uniqueID')
+                    .val()
+                    .trim()
+            };
+            $.post('/api/table-link', newTable).then(function (data) {
+                console.log(data);
+                alert('Table Reserved!');
+            });
+        });
+    </script>
+
 </body>
 
 </html>
