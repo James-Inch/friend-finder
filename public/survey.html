@@ -9,6 +9,8 @@
     <!-- Bootstrapiness -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </head>
 
 <body>
@@ -158,39 +160,50 @@
                 <option value="5">5 (Strongly Agree)</option>
             </select>
             <hr>
-            <button type="button" class="btn btn-primary btn-lg btn-block">Submit</button>
+            <button type="button" class="btn btn-primary btn-lg btn-block submit">Submit</button>
 
         </form>
         <hr>
         <div>
-            <a href="https://github.com/James-Inch/friend-finder">API Friends List</a>
+            <a href="localhost:8080/api/friends">API Friends List</a>
             <span>|</span>
-            <a href="#">GitHub Repo</a>
+            <a href="https://github.com/James-Inch/friend-finder">GitHub Repo</a>
+            <span>|</span>
+            <a href="localhost:8080">Home</a>
         </div>
     </div>
 
-    <script>
-        $('#add-btn').on('click', function (event) {
+    <script type="text/javascript">
+
+        $(".submit").on("click", function (event) {
             event.preventDefault();
-            var newTable = {
-                name: $('#name')
-                    .val()
-                    .trim(),
-                phoneNumber: $('#phoneNumber')
-                    .val()
-                    .trim(),
-                email: $('#email')
-                    .val()
-                    .trim(),
-                uniqueID: $('#uniqueID')
-                    .val()
-                    .trim()
+
+           var friendArray = {
+                friendName: $("#userName").val().trim(),
+                friendpic: $("#userImage").val().trim(),
             };
-            $.post('/api/table-link', newTable).then(function (data) {
-                console.log(data);
-                alert('Table Reserved!');
-            });
+
+            console.log(friendArray);
+
         });
+
+        $.post("/api/friends", friendArray,
+            function (data) {
+               // Clear the form when submitting
+                $("#userName").val("");
+                $("#userImage").val("");
+                $("50").val("");
+            
+
+            });
+
+        // $.post("/api/friendArray", friendArray)
+        //     .then(function (data) {
+        //         console.log("add.html", data);
+        //     });
+
+
+
     </script>
 
 </body>
