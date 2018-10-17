@@ -178,25 +178,37 @@
         $(".submit").on("click", function (event) {
             event.preventDefault();
 
-           var friendArray = {
+            var newFriend = {
                 friendName: $("#userName").val().trim(),
                 friendpic: $("#userImage").val().trim(),
             };
 
-            console.log(friendArray);
 
+            var q1 = $("#q1").val().trim();
+            var q2 = $("#q2").val().trim();
+            var q3 = $("#q3").val().trim();
+            var q4 = $("#q4").val().trim();
+            var q5 = $("#q5").val().trim();
+            var q6 = $("#q6").val().trim();
+            var q7 = $("#q7").val().trim();
+            var q8 = $("#q8").val().trim();
+            var q9 = $("#q9").val().trim();
+            var q10 = $("#q10").val().trim();
+
+            var friendScore = [];
+
+            friendScore.push(q1, q2, q3, q4, q5, q6, q7, q8, q9, q10);
+
+            console.log(friendScore);
+
+            // $.post("/api/friends", newFriend,
+            //     function (data) {
+            //         // Clear the form when submitting
+            //         $("#userName").val("");
+            //         $("#userImage").val("");
+            //         $("50").val("");
+            //     });
         });
-
-        $.post("/api/friends", friendArray,
-            function (data) {
-               // Clear the form when submitting
-                $("#userName").val("");
-                $("#userImage").val("");
-                $("50").val("");
-            
-
-            });
-
         // $.post("/api/friendArray", friendArray)
         //     .then(function (data) {
         //         console.log("add.html", data);
