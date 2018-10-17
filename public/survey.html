@@ -177,17 +177,10 @@
 
 </body>
 <script type="text/javascript">
-
+    // When Submit is clicked. 
     $(".submit").on("click", function (event) {
         event.preventDefault();
-
-        var newFriend = {
-            friendName: $("#userName").val().trim(),
-            friendpic: $("#userImage").val().trim()
-            // friendTotal: $(friendTotal)
-        };
-
-
+        // Get all survey values.
         var q1 = $("#q1").val().trim();
         var q2 = $("#q2").val().trim();
         var q3 = $("#q3").val().trim();
@@ -197,48 +190,53 @@
         var q7 = $("#q7").val().trim();
         var q8 = $("#q8").val().trim();
         var q9 = $("#q9").val().trim();
-        var q10 = $("#q10").val().trim();
-
-        var friendScore = [];
+        var q10 = $("#q10").val().trim();   
+        // Array to hold survey values.
+        var friendScoreArray = [];
+        // Starting point for the for loop to add to.
         var friendTotal = 0;
-        friendScore.push(q1, q2, q3, q4, q5, q6, q7, q8, q9, q10);
-
-        var friendParsedScore = friendScore.map(function (x) {
+        // Push all survey values to friendScoreArray.
+        friendScoreArray.push(q1, q2, q3, q4, q5, q6, q7, q8, q9, q10);
+        // Parse friendscore array to integers 
+        var friendParsedScore = friendScoreArray.map(function (x) {
             return parseInt(x, 10);
-        })
-
-        console.log(newFriend);
-
+        });
+        // loop through friendScoreArray and get sum of indexes
         for (var i = 0; i < friendParsedScore.length; i++) {
             friendTotal += friendParsedScore[i];
         };
-
-        console.log("friendTotal " + friendTotal);
-
-        // $.post("/api/friends", newFriend,
-        //     function (data) {
-        //         // Clear the form when submitting
-        //         $("#userName").val("");
-        //         $("#userImage").val("");
-        //         $("#q1").val("");
-        //         $("#q2").val("");
-        //         $("#q3").val("");
-        //         $("#q4").val("");
-        //         $("#q5").val("");
-        //         $("#q6").val("");
-        //         $("#q7").val("");
-        //         $("#q8").val("");
-        //         $("#q9").val("");
-        //         $("#q10").val("");
-        //     });
+        // newFriend object
+        var newFriend = {
+            friendName: $("#userName").val().trim(),
+            friendpic: $("#userImage").val().trim(),
+            friendScoreArray: `${friendTotal}`
+        };
+        // Post newfirend to api/friends endpoint
+        $.post("/api/friends", newFriend,
+            function (data) {
+                // If a table is available... tell user they are booked.
+                if (data) {
+                    console.log("Friend added!")
+                }
+                // If a table is available... tell user they on the waiting list.
+                else {
+                    console.log("Somthing went wrong.");
+                }
+                // Clear the form when submitting
+                $("#userName").val("");
+                $("#userImage").val("");
+                $("#q1").val("");
+                $("#q2").val("");
+                $("#q3").val("");
+                $("#q4").val("");
+                $("#q5").val("");
+                $("#q6").val("");
+                $("#q7").val("");
+                $("#q8").val("");
+                $("#q9").val("");
+                $("#q10").val("");
+            });
     });
-    // $.post("/api/friendArray", friendArray)
-    //     .then(function (data) {
-    //         console.log("add.html", data);
-    //     });
-
-
-
 </script>
 
 </html>
