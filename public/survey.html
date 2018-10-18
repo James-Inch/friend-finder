@@ -209,7 +209,7 @@
         var newFriend = {
             friendName: $("#userName").val().trim(),
             friendpic: $("#userImage").val().trim(),
-            friendScoreArray: `${friendTotal}`
+            friendScoreArray: friendTotal  
         };
         // Post newfirend to api/friends endpoint
         $.post("/api/friends", newFriend,
